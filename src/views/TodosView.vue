@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { uid } from "uid";
+import { Icon } from "@iconify/vue";
 import TodoCreator from "../components/TodoCreator.vue";
 import TodoItem from "../components/TodoItem.vue";
 
@@ -21,9 +22,13 @@ const createTodo = (todo) => {
   <main>
     <h1>Create Todo</h1>
     <TodoCreator @create-todo="createTodo" />
-    <ul class="todo-list">
+    <ul class="todo-list" v-if="todoList.length > 0">
       <TodoItem v-for="todo in todoList" :todo="todo" />
     </ul>
+    <p class="todos-msg" v-else>
+      <Icon icon="noto-v1:sad-but-relieved-face" />
+      <span>You have no todo's to complete! Add one!</span>
+    </p>
   </main>
 </template>
 
