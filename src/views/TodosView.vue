@@ -14,12 +14,19 @@ const createTodo = (todo) => {
     isCompleted: null,
     isEditing: null,
   });
-  console.log(todoList.value);
 };
 
 const toggleTodoComplete = (todoPos) => {
   todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted;
-  console.log(todoList.value[todoPos].isCompleted);
+};
+const toggleEditTodo = (todoPos) => {
+  todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing;
+};
+const updateTodo = (todoVal, todoPos) => {
+  todoList.value[todoPos].todo = todoVal;
+};
+const deleteTodo = (todoId) => {
+  todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
 };
 </script>
 
@@ -33,6 +40,9 @@ const toggleTodoComplete = (todoPos) => {
         :todo="todo"
         :index="index"
         @toggle-complete="toggleTodoComplete"
+        @edit-todo="toggleEditTodo"
+        @update-todo="updateTodo"
+        @delete-todo="deleteTodo"
       />
     </ul>
     <p class="todos-msg" v-else>
